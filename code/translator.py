@@ -1,4 +1,5 @@
 from store import character_classes, flags, escape_characters
+from parser import parse
 
 # Append a literal string to the regex
 def lit(literal):
