@@ -1,57 +1,61 @@
 from store import character_classes, flags, escape_characters
 
-def nocase(regex): return "(?m)" + regex
+# Append a literal string to the regex
+def lit(literal):
+    return escape(literal)
 
-def lit(regex, literal):
-    literal = escape(literal)
-    regex += literal
-    return regex
-
-def rengex_in(regex, options):
+# Generate a [] in statement from a comma separated list of characters, character classes, and ranges.
+def rengex_in(options):
     options = options.split(",")
+    print(options)
     res = "["
     for option in options:
+        # If it is a character class, substitute it.
         if option in character_classes:
-            if character_classes[option] == '.':
+            if character_classes[option] == '.': # . is not allowed inside an in statement
                 print(f"Error: {option} is not allowed inside an in statement")
                 exit(0)
-            option = character_classes[option]
+            res += character_classes[option]
 
-        elif option[:6].lower() == 'range:': option = rengex_range(option[6:])
-        elif len(option) >= 1:
+        # If it is a range, substitute it.
+        elif option[:6].lower() == 'range:': res += rengex_range(option[6:])
+        elif not len(option) == 1: # All non range/character classes must be one character.
             print("Error: invalid input into in statement. Each comma separated input must be a character, or keyword")
             print(f"Invalid input: {option}")
             exit(0)
-        res += option
+        else:
+            res += escape(option)
     res += "]"
-    regex += res
-    return regex
+    return res
 
-def notin(regex, options):
+# Same as rengex_in except we want to exclude these characters.
+def notin(options):
+    res = rengex_in(options)
+    res = res[0] + "^" + res[1:]
+    return res
+
+def lookbehind(options):
     pass
 
-def before(regex, options):
+def lookahead(options):
     pass
 
-def after(regex, options):
+def notlookahead(options):
     pass
 
-def notbefore(regex, options):
+def notlookbehind(options):
     pass
 
-def notafter(regex, options):
+def nocapture(options):
     pass
 
-def nograb(regex, options):
+def group(contents):
     pass
 
-def group(regex, contents):
+def groupref(id):
     pass
 
-def groupref(regex, id):
-    pass
-
-def rengex_or(regex, option1, option2):
+def rengex_or(option1, option2):
     pass
 
 def rengex_range(items):

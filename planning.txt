@@ -18,8 +18,11 @@ Text:
     beginning (per line)                                    | \A (string)
     ending (per line)                                       | \Z (string)
     digit(s)                                                | \d
+    nondigit(s)                                             | \D
     letter(s)                                               | \w
+    nonletter(s)                                            | \W
     whitespace(s)                                           | \s
+    nonwhitespace(s)                                        | \S
     character(s)                                            | .
     punctuation                                             | [:punct:]
     1... (denoting number times)                            |

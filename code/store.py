@@ -6,8 +6,11 @@ character_classes = {
     "beginning": "\A",
     "ending": "\Z",
     "digit": "\d",
+    "nondigit": "\D",
     "letter": "\w",
+    "nonletter": "\W",
     "whitespace": "\s",
+    "nonwhitespace": "\S",
     "character": ".",
     "punctuation": "[:punct:]"
 }

@@ -18,18 +18,18 @@ while i < len(args):
     arg = args[i]
     if arg in flags:
         extra_args = flags[arg]
-        if   arg == "-nocase":      regex = translator.nocase(regex)
-        elif arg == "-lit":         regex = translator.lit(regex, args[i+1])
-        elif arg == "-in":          regex = translator.rengex_in(regex, args[i+1])
-        elif arg == "-notin":       regex = translator.notin(regex, args[i+1])
-        elif arg == "-before":      regex = translator.before(regex, args[i+1])
-        elif arg == "-after":       regex = translator.after(regex, args[i+1])
-        elif arg == "-notbefore":   regex = translator.notbefore(regex, args[i+1])
-        elif arg == "-notafter":    regex = translator.notafter(regex, args[i+1])
-        elif arg == "-nograb":      regex = translator.nograb(regex, args[i+1])
-        elif arg == "-group":       regex = translator.group(regex, args[i+1])
-        elif arg == "-groupref":    regex = translator.groupref(regex, args[i+1])
-        elif arg == "-or":          regex = translator.rengex_or(regex, args[i+1], args[i+2])
+        if   arg == "-nocase":      regex =  "(?i)" + regex
+        elif arg == "-lit":         regex += translator.lit(args[i+1])
+        elif arg == "-in":          regex += translator.rengex_in(args[i+1])
+        elif arg == "-notin":       regex += translator.notin(args[i+1])
+        elif arg == "-before":      regex += translator.before(args[i+1])
+        elif arg == "-after":       regex += translator.after(args[i+1])
+        elif arg == "-notbefore":   regex += translator.notbefore(args[i+1])
+        elif arg == "-notafter":    regex += translator.notafter(args[i+1])
+        elif arg == "-nograb":      regex += translator.nograb(args[i+1])
+        elif arg == "-group":       regex += translator.group(args[i+1])
+        elif arg == "-groupref":    regex += translator.groupref(args[i+1])
+        elif arg == "-or":          regex += translator.rengex_or(args[i+1], args[i+2])
         i += extra_args
     elif arg in character_classes:
         regex += character_classes[arg]
