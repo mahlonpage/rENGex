@@ -1,11 +1,15 @@
 import translator
 import sys
-from store import help_message
+from store import help_message, wrong_num_arguments_message
 
 # Base file for running rENGex from the command line.
+if len(sys.argv) == 1:
+    print(wrong_num_arguments_message)
+    exit(0)
+
 if len(sys.argv) > 2:
+    print(wrong_num_arguments_message)
     print(f"One argument expected, received {len(sys.argv) - 1}")
-    print("Please pass all arguments inside of single quotes to avoid shell expansion")
     exit(0)
 
 input = sys.argv[1]

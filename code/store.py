@@ -41,6 +41,11 @@ flags = {
     "-groupref": 1
 }
 
+wrong_num_arguments_message= """======rENGex======
+Please pass all arguments inside of single quotes to avoid shell expansion
+Usage: regex '<rENGex>'
+For help please run: regex -h"""
+
 help_message = """
 ==================== rENGex ====================
 Created by: Mahlon Page
