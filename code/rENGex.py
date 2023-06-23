@@ -1,5 +1,6 @@
 import translator
 import sys
+from store import help_message
 
 # Base file for running rENGex from the command line.
 if len(sys.argv) > 2:
@@ -10,5 +11,6 @@ if len(sys.argv) > 2:
 input = sys.argv[1]
 args = input.split(" ")
 
-if args == "-h": print("Help message here")
-print(f"Your REGEX is: {translator.parse(args, )}")
+if "-h" in args:    print(help_message)
+else:               print(f"Your REGEX is: {translator.parse(args, )}")
+exit(0)
