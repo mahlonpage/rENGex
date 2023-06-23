@@ -1,5 +1,35 @@
 from store import character_classes, flags, escape_characters
-from parser import parse
+
+# Parse the arguments and return the regex
+def parse(args, no_limits=True):
+    regex = ""
+    i = 0
+    while i < len(args):
+        arg = args[i]
+        if arg in flags:
+            extra_args = flags[arg]
+            if   arg == "-nocase":                  regex =  "(?i)" + regex
+            elif arg == "-lit":                     regex += lit(args[i+1])
+            elif arg == "-in":                      regex += rengex_in(args[i+1])
+            elif arg == "-notin":                   regex += notin(args[i+1])
+            elif arg == "-before" and no_limits:    regex += lookbehind(args[i+1])
+            elif arg == "-after" and no_limits:     regex += lookahead(args[i+1])
+            elif arg == "-notbefore" and no_limits: regex += notlookbehind(args[i+1])
+            elif arg == "-notafter" and no_limits:  regex += notlookahead(args[i+1])
+            elif arg == "-nograb" and no_limits:    regex += nocapture(args[i+1])
+            elif arg == "-group":                   regex += group(args[i+1])
+            elif arg == "-groupref":                regex += groupref(args[i+1])
+            elif arg == "-or" and no_limits:        regex += rengex_or(args[i+1], args[i+2])
+            else: print(f"Error in parsing arguments, invalid flag {arg} inside of {args}")
+            i += extra_args
+        elif arg in character_classes:
+            regex += character_classes[arg]
+        else:
+            print(f"Error in parsing arguments, invalid argument {arg}")
+            print("For help use the -h flag")
+            exit(0)
+        i += 1
+    return regex
 
 # Append a literal string to the regex
 def lit(literal):
@@ -38,6 +68,7 @@ def notin(options):
 def lookbehind(options):
     pass
 
+# In reality, can contain any regex, however look behinds cannot, limiting scope since this is for simpler regex.
 def lookahead(options):
     pass
 
