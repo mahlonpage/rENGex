@@ -1,6 +1,7 @@
 import translator
 import sys
 
+# Base file for running rENGex from the command line.
 if len(sys.argv) > 2:
     print(f"One argument expected, received {len(sys.argv) - 1}")
     print("Please pass all arguments inside of single quotes to avoid shell expansion")

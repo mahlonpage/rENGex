@@ -21,12 +21,12 @@ Characters
 [:punct:] - punctuation
 
 Quantifiers
-+     - 1+ times
-{x}   - x times
-{x,y} - x-y times
-{x,}  - x+ times
-*     - 0+ times
-?     - if 0-1 times, use this
++     - 1+
+{x}   - x
+{x,y} - x-y
+{x,}  - x+
+*     - 0+
+?     - if 0-1, use this
 example: from 1234
 \d{2,4} will return 1234
 \d{2,4}? will return 12

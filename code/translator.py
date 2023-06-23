@@ -1,9 +1,15 @@
 import store
 
+# This file handles parsing and translating our english-regex hybrid language into a pure regex.
+#
+# Mahlon Page
+
 # Parse the arguments and return the regex
 def parse(args):
     regex = ""
     i = 0
+    quantifier_pending = False
+    quantifier = None
     while i < len(args):
         arg = args[i]
         if arg in store.flags:
@@ -32,9 +38,18 @@ def parse(args):
 
         elif arg in store.character_classes: regex += store.character_classes[arg]
         elif arg[0] in store.digits:
+            quantifier_pending = True
+            quantifier = numerical_quantifier(arg)
+            i += 1
+            continue
         else:
             print("For help use the -h flag")
             error(f"Could not parse, invalid argument {arg}")
+
+        if quantifier_pending:
+            regex += quantifier
+            quantifier = None
+            quantifier_pending = False
 
         # Increment to next argument
         i += 1
@@ -94,6 +109,29 @@ def rengex_range(items):
     items[1] = escape(items[1])
     return f"{items[0]}-{items[1]}"
 
+# Handles the various possible range amounts.
+def numerical_quantifier(arg):
+    for character in arg:
+        if character not in store.valid_quantifier_inputs: error(f"Invalid quantifier {arg}. Each character must be a +, -, or number.")
+
+    if arg.count('-') > 1: error(f"Invalid quantifier {arg}. Too many dashes.")
+    if arg.count('+') > 1: error(f"Invalid quantifier {arg}. Too many +s.")
+    if arg.count('-') == 1 and arg.count('+') == 1: error(f"Invalid quantifier {arg}. Cannot have both a + and a -.")
+    if arg.find('+') != -1 and arg.find('+') != len(arg) - 1: error(f"Invalid quantifier {arg}. + must come at the end of quantifier.")
+
+    if '+' not in arg and '-' not in arg: return '{' + arg + '}'
+    if '+' in arg:
+        if arg[0: len(arg) - 1] == '0': return '*'
+        elif arg[0: len(arg) - 1] == '1': return '+'
+        else: return '{' + arg[0: len(arg) - 1] + ',}'
+    if '-' in arg:
+        numbers = arg.split('-')
+        if int(numbers[0]) >= int(numbers[1]): error(f"Invalid quantifier {arg}. The first number must be greater than the second.")
+
+        if int(numbers[0]) == 0 and int(numbers[1]) == 1: return '?'
+        else: return '{' + numbers[0] + ',' + numbers[1] + '}'
+
+
 # Escapes a string by adding \ as needed before escape characters.
 def escape(characters):
     res = ""
@@ -104,5 +142,4 @@ def escape(characters):
 
 # Easy errors
 def error(message):
-    print(message)
-    exit(0)
+    raise Exception(message)
