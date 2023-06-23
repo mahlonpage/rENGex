@@ -1,5 +1,15 @@
 # rENGex
 
+Regex can be hard, especially for beginners. This project serves as a middle-language between English and Regex which can be used to generate regular expressions.
+
+Setup:
+
+1. Clone this repository
+2. Open a terminal and navigate to the repository
+3. Run ./deploy.sh
+4. Restart your terminal
+5. Now type: regex '\<input>'
+
 Characters
 \d - digit
 \w - letter
