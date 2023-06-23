@@ -86,3 +86,7 @@ class TestRengex(unittest.TestCase):
     def test_nocase_in(self):
         regex = T.parse(["-nocase", "-in", "h,e,l,l,o"])
         self.assertEqual(regex, "(?i)[hello]")
+
+    def test_groupref(self):
+        regex = T.parse(["-(", "-lit", "hello", "-)", "-groupref", "1"])
+        self.assertEqual(regex, "(hello)\\1")

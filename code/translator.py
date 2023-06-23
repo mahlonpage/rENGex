@@ -1,4 +1,4 @@
-from store import character_classes, flags, escape_characters
+import store
 
 # Parse the arguments and return the regex
 def parse(args):
@@ -6,14 +6,16 @@ def parse(args):
     i = 0
     while i < len(args):
         arg = args[i]
-        if arg in flags:
-            extra_args = flags[arg]
+        if arg in store.flags:
+            extra_args = store.flags[arg]
             if   arg == "-nocase":                  regex =  "(?i)" + regex
             elif arg == "-lit":                     regex += lit(args[i+1])
             elif arg == "-in":                      regex += rengex_in(args[i+1])
             elif arg == "-notin":                   regex += notin(args[i+1])
+            elif arg == "-groupref":                regex += groupref(args[i+1])
             elif arg == "-)":                       error("No opening parenthesis")
             elif arg == "-(" or "-nograb(":
+                # Figure out how many arguments are in the group, and parse them.
                 j = i
                 final = None
                 while j < len(args):
@@ -22,13 +24,19 @@ def parse(args):
                 if not final: error("No closing parenthesis")
                 if arg == "-(": regex += group(args[i+1:final])
                 else: regex += nocapture(args[i+1:final])
+                # Increment i to the end of the group.
                 i = final
+
+            # Increment counter to represent all arguments eaten by this flag.
             i += extra_args
-        elif arg in character_classes:
-            regex += character_classes[arg]
+
+        elif arg in store.character_classes: regex += store.character_classes[arg]
+        elif arg[0] in store.digits:
         else:
             print("For help use the -h flag")
             error(f"Could not parse, invalid argument {arg}")
+
+        # Increment to next argument
         i += 1
     return regex
 
@@ -43,11 +51,11 @@ def rengex_in(options):
     for option in options:
 
         # If it is a character class, substitute it.
-        if option in character_classes:
+        if option in store.character_classes:
 
             # . is not allowed inside an in statement
-            if character_classes[option] == '.': error(f"Error: {option} is not allowed inside an in statement")
-            res += character_classes[option]
+            if store.character_classes[option] == '.': error(f"Error: {option} is not allowed inside an in statement")
+            res += store.character_classes[option]
 
         # If it is a range, substitute it.
         elif option[:6].lower() == 'range:': res += rengex_range(option[6:])
@@ -71,6 +79,12 @@ def nocapture(options):
 def group(contents):
     return "(" + parse(contents) + ")"
 
+# Reference a previously created group. Created with "-groupref" and a number.
+def groupref(number):
+    value = int(number)
+    if value <= 0: error("Group references must be positive integers")
+    return "\\" + number
+
 # Handles ranges in form of range:x-y
 def rengex_range(items):
     items = items.split("-")
@@ -84,7 +98,7 @@ def rengex_range(items):
 def escape(characters):
     res = ""
     for character in characters:
-        if character in escape_characters: res += "\\"
+        if character in store.escape_characters: res += "\\"
         res += character
     return res
 

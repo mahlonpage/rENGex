@@ -1,5 +1,7 @@
 escape_characters = set("[](){}^$*+?|\\.")
 
+digits = set("0123456789")
+
 character_classes = {
     "start": "^",
     "end": "$",
@@ -20,7 +22,9 @@ flags = {
     "-lit": 1,
     "-in": 1,
     "-notin": 1,
-    "-nograb(": 1,
-    "-(": 1,
-    "-)": -1
+    # -nograb( and -( handle their own incrementing so they add 0 by default.
+    "-nograb(": 0,
+    "-(": 0,
+    "-)": -1,
+    "-groupref": 1
 }
