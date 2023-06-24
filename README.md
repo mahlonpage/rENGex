@@ -2,7 +2,7 @@
 
 rENGex is a simple english-regex hybrid language that compiles to regular expressions through the rENGex Engine (this project!). The language is designed to be easy to read and write, and allows easy creation of complex regular expressions. Watch the demo below to see its magic in action!
 
-https://github.com/mahlonpage/rENGex/assets/90529561/fbdf101a-011d-428a-a4d3-a93f0279e4ea
+https://github.com/mahlonpage/rENGex/assets/90529561/2ef4fd84-ac72-41bb-bd6a-2d2cdcd74536
 
 ## Setup
 Conveniently, this program comes with a setup script.
