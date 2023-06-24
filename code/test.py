@@ -49,6 +49,10 @@ class TestRengex(unittest.TestCase):
         regex = T.parse(["-(", "-lit", "hi", "-nograb(", "-lit", "hello", "-)", "-)"])
         self.assertEqual(regex, "(hi(?:hello))")
 
+    def test_multiple_group(self):
+        regex = T.parse(["-(", "-lit", "hi", "-)", "-(", "-lit", "hello", "-)"])
+        self.assertEqual(regex, "(hi)(hello)")
+
 
 # Nocase flag tests.
     def test_nocase(self):
@@ -98,6 +102,10 @@ class TestRengex(unittest.TestCase):
     def test_quantifier_range(self):
         regex = T.parse(["5-12", "-(", "-lit", "hello", "-)"])
         self.assertEqual(regex, "(hello){5,12}")
+
+    def test_quantifier_minus(self):
+        regex = T.parse(["5-", "-(", "-lit", "hello", "-)"])
+        self.assertEqual(regex, "(hello){0,5}")
 
     def test_quantifier_invalid_range_exception(self):
         regex = lambda: T.parse(["12-5", "-(", "-lit", "hello", "-)"])

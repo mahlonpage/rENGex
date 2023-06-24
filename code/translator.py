@@ -22,12 +22,19 @@ def parse(args):
             elif arg == "-)":                       error("No opening parenthesis")
             elif arg == "-(" or "-nograb(":
                 # Figure out how many arguments are in the group, and parse them.
+                # Find matching closing parenthesis.
+                opening_parentheses = 0
                 j = i
                 final = None
                 while j < len(args):
-                    if args[j] == "-)": final = j
+                    if args[j] == "-(" or args[j] == "-nograb(": opening_parentheses += 1
+                    if args[j] == "-)":
+                        opening_parentheses -= 1
+                        if opening_parentheses == 0:
+                            final = j
+                            break
                     j += 1
-                if not final: error("No closing parenthesis")
+                if not final: error("Imbalanced parentheses.")
                 if arg == "-(": regex += group(args[i+1:final])
                 else: regex += nocapture(args[i+1:final])
                 # Increment i to the end of the group.
@@ -117,7 +124,7 @@ def numerical_quantifier(arg):
 
     if arg.count('-') > 1: error(f"Invalid quantifier {arg}. Too many dashes.")
     if arg.count('+') > 1: error(f"Invalid quantifier {arg}. Too many +s.")
-    if arg.count('-') == 1 and arg.count('+') == 1: error(f"Invalid quantifier {arg}. Cannot have both a + and a -.")
+    if arg.count('-') == 1 and arg.count('+') == 1: error(f"Invalid quantifier {arg}. Cannot have both a + and a -")
     if arg.find('+') != -1 and arg.find('+') != len(arg) - 1: error(f"Invalid quantifier {arg}. + must come at the end of quantifier.")
 
     if '+' not in arg and '-' not in arg: return '{' + arg + '}'
@@ -125,7 +132,9 @@ def numerical_quantifier(arg):
         if arg[0: len(arg) - 1] == '0': return '*'
         elif arg[0: len(arg) - 1] == '1': return '+'
         else: return '{' + arg[0: len(arg) - 1] + ',}'
-    if '-' in arg:
+    if '-' in arg and arg.find('-') == len(arg) - 1:
+        return '{0,' + arg[0: len(arg) - 1] + '}'
+    elif '-' in arg:
         numbers = arg.split('-')
         if int(numbers[0]) >= int(numbers[1]): error(f"Invalid quantifier {arg}. The first number must be greater than the second.")
 
