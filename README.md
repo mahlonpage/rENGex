@@ -39,7 +39,7 @@ Substitutions are words which can be typed and they will be matched with any ite
 
 We also have special substitutions, these functions are special in denoting the start or end of a line or string.
 
-Valid Substitutions:
+Substitutions:
 | Keyword | Meaning |
 | ------- | ------- |
 | digit          | Matches any digit            |
@@ -69,15 +69,15 @@ takes the number of words after it as denoted in the table.
 "?" denotes special group flags. Groups can be of infinite size and match up until they find their corresponding group close flag.
 
 | Flag | Input Items Consumed | Meaning | Example Usage | Matching strings |
-| ---- | -------------------- | ------- | ------- | ------------ |
-| -nocase:  | 0 | Makes the regex case-insensitive. Can be used anywhere, but only once.  | -nocase -lit a | 'a', 'A'
-| -lit:     | 1 | Takes the next token as a literal string to search for.      | -lit hello               | 'hello'
-| -in:      | 1 | Takes the next token as a list of characters to match.       | -in a,b,c,range:1-9      | 'a', 'b', 'c', '1', '3', '9'
-| -notin:   | 1 | Takes the next token as a list of characters to not match.   | -notin a,b,c,range:1-9   | 'z', 'g', '0'
-| -nograb(: | ? | Takes everything until matching -) as a non-capturing group. | -nograb( character -)   | 'a', '@', 'G'
-| -(:       | ? | Takes everything until matching -) as a capturing group, which can be referenced with -groupref     | -( character -) digit    | '12', '^2', 'b8'
-| -):       | 0 | Ends a capturing or non-capturing group.                     | -( -nograb( character -) digit -) | '12', '^2', 'b8'
-| -groupref:| 1 | Takes the next token as a group number to match.             | -( character -) -lit hello -groupref 1         | 'ahelloa', '@hello@', '9hello9'
+| ---------- | -------------------- | ------- | ------- | ------------ |
+| -nocase    | 0 | Makes the regex case-insensitive. Can be used anywhere, but only once.  | -nocase -lit a | 'a', 'A'
+| -lit       | 1 | Takes the next token as a literal string to search for.      | -lit hello               | 'hello'
+| -in        | 1 | Takes the next token as a list of characters to match.       | -in a,b,c,range:1-9      | 'a', 'b', 'c', '1', '3', '9'
+| -notin     | 1 | Takes the next token as a list of characters to not match.   | -notin a,b,c,range:1-9   | 'z', 'g', '0'
+| -nograb(   | ? | Takes everything until matching -) as a non-capturing group. | -nograb( character -)   | 'a', '@', 'G'
+| -(         | ? | Takes everything until matching -) as a capturing group, which can be referenced with -groupref     | -( character -) digit    | '12', '^2', 'b8'
+| -)         | 0 | Ends a capturing or non-capturing group.                     | -( -nograb( character -) digit -) | '12', '^2', 'b8'
+| -groupref  | 1 | Takes the next token as a group number to match.             | -( character -) -lit hello -groupref 1         | 'ahelloa', '@hello@', '9hello9'
 
 ## Examples
 
