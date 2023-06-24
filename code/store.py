@@ -21,6 +21,8 @@ character_classes = {
     "nonletter": "\W",
     "whitespace": "\s",
     "nonwhitespace": "\S",
+    "wordedge": "\\b",
+    "nonwordedge": "\B",
     "character": ".",
     "punctuation": "[:punct:]"
 }

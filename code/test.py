@@ -170,6 +170,14 @@ class TestRengex(unittest.TestCase):
         regex = T.parse(["nonwhitespace"])
         self.assertEqual(regex, "\\S")
 
+    def test_wordedge(self):
+        regex = T.parse(["wordedge"])
+        self.assertEqual(regex, "\\b")
+
+    def test_nonwordedge(self):
+        regex = T.parse(["nonwordedge"])
+        self.assertEqual(regex, "\\B")
+
     def test_character(self):
         regex = T.parse(["character"])
         self.assertEqual(regex, ".")
