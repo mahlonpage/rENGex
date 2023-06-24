@@ -5,13 +5,15 @@ It is designed to be easy to read and write, and to be a stepping stone for lear
 
 I built this project with the goal of creating a beginner-friendly way of learning and using regex. Along the way this project has refined my knowledge of the nuances of regex and given me a chance to practice parsing and scripting.
 
+![Gif-of-rENGex-being-used](./demo/rENGex%20Demo%20Video.gif)
+
 ## Setup
 Conveniently, this program comes with a setup script.
 
 1. Open a terminal and navigate to this repository
 2. Run ./deploy.sh
 3. Restart your terminal
-4. Run the program: `regex '<rENGex input>`
+4. Run the program in the command line: `regex '<rENGex input>`
 
 Note: this only works for Unix-based shells.
 
