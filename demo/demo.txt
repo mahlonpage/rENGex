@@ -1,0 +1,39 @@
+--- Phone numbers ---
+English: Match a phone number in the format xxx-xxx-xxxx with an optional extension of the form ext:xxxx
+rENGex: 3 digit -lit - 3 digit -lit - 4 digit 0-1 -( 1+ whitespace -lit ext: 4 digit -)
+Regex: \d{3}-\d{3}-\d{4}(\s+ext:\d{4})?
+
+098-765-4321
+123-456-7890 ext:0000
+123-456-7890 ext:123
+1234-567-890 ext:9999
+
+
+
+--- Emails ---
+English: Match an email address in the format user@domain.service
+rENGex: 1+ -in letter,digit,_,-,. -lit @ 1+ -in letter,digit,_,-,. -lit . 2-4 letter end
+Regex: [\w\d_\-\.]+@[\w\d_\-\.]+\.\w{2,4}$
+
+alice@my_university.edu
+bob@gmail.com
+not a valid email@ email.net
+
+
+
+--- Lines where x is assigned a value in code ---
+English: Match all lines where x is assigned a new value.
+rENGex: start 0+ whitespace -lit x 0-1 space -lit = 1+ character end
+Regex: ^\s*x ?=.+$
+
+def hello():
+    x=1
+    y = 2
+    for i in range(10):
+        x = i * x
+        y = x * y
+    y \= x
+    x = x - 1
+    if (x == y): print("We match!")
+    x = 0
+    return x
