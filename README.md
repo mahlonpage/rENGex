@@ -1,69 +1,61 @@
 # rENGex
 
-Regex can be hard, especially for beginners. This project serves as a middle-language between English and Regex which can be used to generate regular expressions.
+rENGex is a simple english-regex hybrid language that compiles to regular expressions.
+It is designed to be easy to read and write, and to be a stepping stone for learning regex.
 
-Setup:
+I built this project with the goal of creating a beginner-friendly way of learning and using regex. Along the way this project has refined my knowledge of the nuances of regex and given me a chance to practice parsing and scripting.
 
-1. Clone this repository
-2. Open a terminal and navigate to the repository
-3. Run ./deploy.sh
-4. Restart your terminal
-5. Now type: regex '\<input>'
+## Setup
+Conveniently, this program comes with a setup script.
 
-Characters
-\d - digit
-\w - letter
-\s - whitespace
-\D - not digit
-\W - not letter
-\S - not whitespace
-.  - character (except linebreak)
-[:punct:] - punctuation
+1. Open a terminal and navigate to this repository
+2. Run ./deploy.sh
+3. Restart your terminal
+4. Run the program: `regex '<rENGex input>`
 
-Quantifiers
-+     - 1+
-{x}   - x
-{x,y} - x-y
-{x,}  - x+
-*     - 0+
-?     - if 0-1, use this
-example: from 1234
-\d{2,4} will return 1234
-\d{2,4}? will return 12
+Note: this only works for Unix-based shells.
 
-Logic
-|  - -OR
-() - -GROUP
-\1 - contents of group 1 r(\w)g\1x = regex
-(?: ) - non capturing group
+## Usage
 
-White-Space
-\t - tab
-\r - return
-\n - newline
-\N - non-newline
+Normal:                                         python3 rENGex.py '<your rENGex here>'
+For help:                                       python3 rENGex.py -h
+.rc file shortcut installed by deploy.sh:       regex '<your rENGex here>'
 
-Character Classes
-[...] - one of in bracket
-[x-y] - in range x-y
-[^x]  - not x
-[^x-y]- not in range x-y
+Valid Substitutions:
+    digit:          Matches any digit.                                  Example: digit
+    nondigit:       Matches any non-digit.                              Example: nondigit
+    letter:         Matches any letter.                                 Example: letter
+    nonletter:      Matches any non-letter.                             Example: nonletter
+    whitespace:     Matches any whitespace.                             Example: whitespace
+    nonwhitespace:  Matches any non-whitespace.                         Example: nonwhitespace
+    character:      Matches any character.                              Example: character
+    punctuation:    Matches any punctuation.                            Example: punctuation
 
-Anchors/Boundaries
-^ - start
-$ - end
-\A - beginning
-\Z - ending
-\b - word boundary (just one side has letter, num, _)
-\B - not a boundary
+Start/End:
+    start:          Matches the start of a line. (more common)          Example: start character
+    end:            Matches the end of a line. (more common)            Example: end character
+    beginning:      Matches the beginning of a string. (less common)    Example: beginning digit
+    ending:         Matches the end of a string. (less common)          Example: ending digit
 
-Inline Modifiers
-(?i) - case-insensitive
-(?s) - let's . match \n
-(?m) - match beginning and end every line
+Quantifiers:
+    Before any term you can use a quantifier which specifies how many times to match.
+    You can input quantifiers in one of three forms:
+    <digit>                 Matches exactly that many times.  Example: 3 letter
+    <digit>+                Matches at least that many times. Example: 3+ letter
+    <digit>-<digit>         Matches between that many times.  Example: 3-7 letter
 
-Lookarounds
-(?= )  - Positive Lookahead
-(?<= ) - Positive lookbehind
-(?! )  - Negative lookahead
-(?<! ) - Negative Lookbehind
+Flags:
+    Flags (with the exception of -nocase) are used to denote that the following tokens should be treated
+    differently and are a part of the flag. Flags are denoted with a - before the flag name. Each flag
+    takes the number of words after it as denoted immediately after the flag name. "?" denotes that
+    the number of tokens is limitless and ends when a matching -) flag is found.
+    -nocase:   0   Makes the regex case-insensitive.                               Example: -nocase
+    -lit:      1   Takes the next token as a literal string.                       Example: -lit hello
+    -in:       1   Takes the next token as a list of characters to match.          Example: -in a,b,c,range:1-9
+    -notin:    1   Takes the next token as a list of characters to not match.      Example: -notin a,b,c,range:1-9
+    -nograb(:  ?   Takes everything until matching -) as a non-capturing group.    Example: -nograb() character -) digit
+    -(:        ?   Takes everything until matching -) as a capturing group.        Example: -( character -) digit
+    -):        0   Ends a capturing or non-capturing group.                        Example: -( character -) digit -)
+    -groupref: 1   Takes the next token as a group number to match.                Example: -( character -) -groupref 1
+
+## Examples
