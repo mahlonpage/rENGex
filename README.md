@@ -5,7 +5,9 @@ It is designed to be easy to read and write, and to be a stepping stone for lear
 
 I built this project with the goal of creating a beginner-friendly way of learning and using regex. Along the way this project has refined my knowledge of the nuances of regex and given me a chance to practice parsing and scripting.
 
-![Gif-of-rENGex-being-used](./demo/rENGex%20Demo%20Video.gif)
+https://github.com/mahlonpage/rENGex/assets/90529561/fbdf101a-011d-428a-a4d3-a93f0279e4ea
+
+
 
 ## Setup
 Conveniently, this program comes with a setup script.
