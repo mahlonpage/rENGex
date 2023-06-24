@@ -1,9 +1,6 @@
 # rENGex
 
-rENGex is a simple english-regex hybrid language that compiles to regular expressions.
-It is designed to be easy to read and write, and to be a stepping stone for learning regex.
-
-I built this project with the goal of creating a beginner-friendly way of learning and using regex. Along the way this project has refined my knowledge of the nuances of regular expressions and given me a chance to practice parsing and scripting.
+rENGex is a simple english-regex hybrid language that compiles to regular expressions through the rENGex Engine (this project!). The language is designed to be easy to read and write, and allows easy creation of complex regular expressions. Watch the demo below to see its magic in action!
 
 https://github.com/mahlonpage/rENGex/assets/90529561/fbdf101a-011d-428a-a4d3-a93f0279e4ea
 
@@ -13,7 +10,7 @@ Conveniently, this program comes with a setup script.
 1. Open a terminal and navigate to this repository
 2. Run ./deploy.sh
 3. Restart your terminal
-4. Run the program in the command line: `regex '<rENGex input>`
+4. Run the program in the command line: `regex '<rENGex input>'`
 
 Note: this only works for Unix-based shells.
 

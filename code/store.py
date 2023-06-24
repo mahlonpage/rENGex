@@ -106,5 +106,5 @@ Usage:
         The following rENGex matches strings which have some amount of the same character on each sides of a -
             regex '-( 1+ letter -) -lit - -groupref 1'
 
-    For more examples, please visit: https://github.com/mahlonpage/rENGex
+    For more examples and explanations, please visit: https://github.com/mahlonpage/rENGex
 """
