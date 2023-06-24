@@ -16,5 +16,5 @@ input = sys.argv[1]
 args = input.split(" ")
 
 if "-h" in args:    print(help_message)
-else:               print(f"Your REGEX is: {translator.parse(args, )}")
+else:               print(f"Your REGEX is: {translator.parse(args, )} \n")
 exit(0)

@@ -76,6 +76,7 @@ def rengex_in(options):
         elif option[:6].lower() == 'range:': res += rengex_range(option[6:])
         # All non range/character classes must be one character.
         elif not len(option) == 1: error(f"Error: invalid input into in statement. Must be character, char class, or range. Invalid input: {option}")
+        elif option == '-': res += '\-' # - is a special character in an in statement only
         else: res += escape(option)
     res += "]"
     return res

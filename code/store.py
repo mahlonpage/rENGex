@@ -21,10 +21,10 @@ character_classes = {
     "nonletter": "\W",
     "whitespace": "\s",
     "nonwhitespace": "\S",
+    "space": " ",
     "wordedge": "\\b",
     "nonwordedge": "\B",
-    "character": ".",
-    "punctuation": "[:punct:]"
+    "character": "."
 }
 
 # This dictionary contains all flag words and the number of extra tokens they consume when you

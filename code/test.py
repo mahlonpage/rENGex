@@ -27,6 +27,10 @@ class TestRengex(unittest.TestCase):
         regex = T.parse(["-in", "a,b,range:d-f,c"])
         self.assertEqual(regex, "[abd-fc]")
 
+    def test_dash_escapes(self):
+        regex = T.parse(["-in", "a,b,range:d-f,c,-"])
+        self.assertEqual(regex, "[abd-fc\-]")
+
 
 # Test groups and no capture groups.
     def test_group(self):
@@ -182,6 +186,6 @@ class TestRengex(unittest.TestCase):
         regex = T.parse(["character"])
         self.assertEqual(regex, ".")
 
-    def test_punctuation(self):
-        regex = T.parse(["punctuation"])
-        self.assertEqual(regex, "[:punct:]")
+    def test_space(self):
+        regex = T.parse(["space"])
+        self.assertEqual(regex, " ")

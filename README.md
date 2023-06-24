@@ -7,8 +7,6 @@ I built this project with the goal of creating a beginner-friendly way of learni
 
 https://github.com/mahlonpage/rENGex/assets/90529561/fbdf101a-011d-428a-a4d3-a93f0279e4ea
 
-
-
 ## Setup
 Conveniently, this program comes with a setup script.
 
