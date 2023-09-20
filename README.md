@@ -18,7 +18,7 @@ Note: this only works for Unix-based shells.
 
 To use: `python3 ./code/rENGex.py '<input>'` or `regex '<input>'`
 
-For help replace \<input> with -h
+For help run 'regex -h' or 'regex -help'
 
 rENGex inputs are made up of three major components: quantifiers, substitutions, and flags. Notably, flags will consume the following arguments as part of it's translation. For example, a -groupref flag, references a group number and consumes the next input as that group number.
 
